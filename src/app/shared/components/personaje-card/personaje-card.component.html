@@ -1,0 +1,17 @@
+<div class="contenedor-tarjetas">
+<ion-card class="card" *ngFor="let personaje of personajes">
+  <img alt="Personaje de Rick y Morty" [src]= "personaje.image" />
+  <ion-card-header>
+    <ion-card-title>{{personaje.name}}</ion-card-title>
+    <ion-card-subtitle>{{personaje.gender}}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ul>
+      <li><strong>Tipo: </strong> {{personaje.type}}</li>
+      <li><strong>Estado: </strong>{{personaje.status}}</li>
+      <li><strong>Localización: </strong>{{personaje.name}}</li>
+    </ul>
+  </ion-card-content>
+</ion-card>
+</div>

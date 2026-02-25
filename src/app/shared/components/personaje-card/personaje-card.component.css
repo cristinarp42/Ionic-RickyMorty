@@ -1,0 +1,9 @@
+.card{
+    width: 300px;
+}
+
+.contenedor-tarjetas{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
