@@ -4,6 +4,8 @@ export interface Personaje {
   species: string;
   type: string;
   gender: 'Female' | 'Male' | 'Genderless' | 'No sabemos';
-  location: Location;
+    location: {
+    name: string;
+  };
   image: string;
 }

@@ -4,8 +4,6 @@ import { RickMortyService } from '../../services/rickymorty.service';
 import { Personaje } from '../../models/personaje.model';
 import { CommonModule } from '@angular/common';
 
-
-
 @Component({
   selector: 'app-personaje-card',
   templateUrl: './personaje-card.component.html',
@@ -32,13 +30,12 @@ export class PersonajeCard implements OnInit{
 
     if (this.tipo){
       this.rickMortyService.getPersonajesporCategoria(this.tipo).subscribe(response => {
-        this.personajes= response.result;
+        this.personajes= response.results;
       })
 
     } else {
       this.rickMortyService.getPersonajes().subscribe(response => {
         this.personajes = response.results; 
-        console.log(this.personajes)
     });
     }
   
