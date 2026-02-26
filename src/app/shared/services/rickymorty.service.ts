@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import type { Personaje } from '../models/personaje.model';
+import type { Result } from '../models/personaje.model';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -14,12 +14,17 @@ export class RickMortyService {
 
   constructor(private http: HttpClient) {}
 
-  getPersonajes(): Observable<{ results: Personaje[] }> {
-    return this.http.get<{ results: Personaje[] }>(this.apiUrl + "/character");
+  getPersonajes(): Observable<{ results: Result[] }> {
+    return this.http.get<{ results: Result[] }>(this.apiUrl + "/character");
   }
   
-
   getPersonajesporCategoria(categoria: string): Observable<any> {
-    return this.http.get<Personaje>(`${this.apiUrl}/character/?species=${categoria}`);
+    return this.http.get<Result>(`${this.apiUrl}/character/?species=${categoria}`);
   }
+
+  getPerspnajesPorId(id: number):  Observable<any> {
+    return this.http.get<Result>(`${this.apiUrl}/character/${id}`);
+  }
+
+
 }

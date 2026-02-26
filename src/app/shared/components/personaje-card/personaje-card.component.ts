@@ -1,8 +1,9 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
 import { RickMortyService } from '../../services/rickymorty.service';
-import { Personaje } from '../../models/personaje.model';
+import { Result } from '../../models/personaje.model';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-personaje-card',
@@ -15,15 +16,25 @@ import { CommonModule } from '@angular/common';
 
 export class PersonajeCard implements OnInit{
 
-  personajes: Personaje[] = []
+  personajes: Result[] = []
   
   //está esperando el tipo de personaje desde el componente padre (los tabs)
   @Input() tipo?: string
 
-  constructor(private rickMortyService: RickMortyService) {}
+  constructor(
+    private rickMortyService: RickMortyService,
+    //nuevo añadido por Josua: para la ruta a la pagina de info
+    private route: Router
+  ) {}
 
   ngOnInit() {
     this.cargarPersonajes();
+  }
+
+
+  navigateCharacter(id: number){
+    this.route.navigate(['info-character/', id]
+    )
   }
 
   cargarPersonajes() {

@@ -1,0 +1,59 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding" *ngIf="personaje">
+
+  <app-avatar 
+  [foto]="personaje?.image || ''"
+  [nombre]="personaje?.name || ''"
+  [especie]="personaje?.status || ''" 
+  [genero]="personaje?.gender || ''" >
+
+  </app-avatar>
+
+   
+      <ion-list>
+        <ion-item>
+          <ion-label><strong>ID:</strong> {{ personaje.id }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><strong>Nombre:</strong> {{ personaje.name }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><strong>Estado:</strong> {{ personaje.status }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><strong>Especie:</strong> {{ personaje.species }}</ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="personaje.type">
+          <ion-label><strong>Tipo:</strong> {{ personaje.type }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><strong>Género:</strong> {{ personaje.gender }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><strong>Origen:</strong> {{ personaje.origin.name }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><strong>Ubicación actual:</strong> {{ personaje.location.name }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><strong>URL:</strong> <a href="{{ personaje.url }}" target="_blank">{{ personaje.url }}</a></ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><strong>Creado:</strong> {{ personaje.created | date:'medium' }}</ion-label>
+        </ion-item>
+
+       
+        </ion-list>
+
+
+</ion-content>

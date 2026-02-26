@@ -1,5 +1,5 @@
 <div class="contenedor-tarjetas">
-<ion-card class="card" *ngFor="let personaje of personajes">
+<ion-card class="card" *ngFor="let personaje of personajes" (click)="navigateCharacter(personaje.id)" >
   <img alt="Personaje de Rick y Morty" [src]= "personaje.image" />
   <ion-card-header>
     <ion-card-title>{{personaje.name}}</ion-card-title>
