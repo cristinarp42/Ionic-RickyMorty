@@ -3,10 +3,10 @@
 <ion-content class="ion-padding" *ngIf="personaje">
 
   <app-avatar 
-  [foto]="personaje?.image || ''"
-  [nombre]="personaje?.name || ''"
-  [especie]="personaje?.status || ''" 
-  [genero]="personaje?.gender || ''" >
+  [foto]="personaje.image || ''"
+  [nombre]="personaje.name || ''"
+  [especie]="personaje.status || ''" 
+  [genero]="personaje.gender || ''" >
 
   </app-avatar>
 
@@ -44,9 +44,6 @@
           <ion-label><strong>Ubicación actual:</strong> {{ personaje.location.name }}</ion-label>
         </ion-item>
 
-        <ion-item>
-          <ion-label><strong>URL:</strong> <a href="{{ personaje.url }}" target="_blank">{{ personaje.url }}</a></ion-label>
-        </ion-item>
 
         <ion-item>
           <ion-label><strong>Creado:</strong> {{ personaje.created | date:'medium' }}</ion-label>

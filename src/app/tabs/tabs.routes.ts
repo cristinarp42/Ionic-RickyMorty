@@ -24,6 +24,10 @@ export const routes: Routes = [
         loadComponent:() => import('../feature/info-page/info-page.component').then((m) => m.InfoPageComponent)
       },
       {
+        path: 'edit-character/:id',
+        loadComponent: () => import('../feature/edit-character/edit-character.page').then( m => m.EditCharacterPage)
+      },
+      {
         path: '',
         redirectTo: 'tab1',
         pathMatch: 'full',

@@ -12,6 +12,18 @@
       <li><strong>Estado: </strong>{{personaje.status}}</li>
       <li><strong>Localización: </strong>{{personaje.location.name}}</li>
     </ul>
+    <ion-button
+      color="danger"
+      expand="block"
+      (click)="eliminarPersonaje(personaje.id)">
+      Eliminar
+    </ion-button>
+    <ion-button
+      color="warning"
+      expand="block"
+      (click)="editarPersonaje(personaje.id)">
+      Editar
+    </ion-button>
   </ion-card-content>
 </ion-card>
 </div>

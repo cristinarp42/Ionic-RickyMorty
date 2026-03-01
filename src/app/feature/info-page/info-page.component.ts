@@ -36,7 +36,7 @@ export class InfoPageComponent  implements OnInit {
    cargarPersonajes() {
       console.log(this.id)
       this.rickMortyService.getPerspnajesPorId(this.id).subscribe(response => {
-        this.personaje= response.results;
+        this.personaje= response;
         
         console.log(this.personaje)
       })

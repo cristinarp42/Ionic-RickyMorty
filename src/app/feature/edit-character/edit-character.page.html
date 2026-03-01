@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Personaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="personaje">
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="personaje.name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Status</ion-label>
+    <ion-input [(ngModel)]="personaje.status"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" color="primary" (click)="guardarCambios()">
+    Guardar Cambios
+  </ion-button>
+</ion-content>
