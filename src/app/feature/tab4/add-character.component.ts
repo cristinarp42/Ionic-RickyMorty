@@ -8,6 +8,7 @@ import {
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';  
+import { HeaderComponent } from '../../shared/components/header/header.component';
 
 
 
@@ -16,7 +17,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './add-character.component.html',
   styleUrls: ['./add-character.component.scss'],
   standalone: true,
-  imports: [IonInput, IonButton, IonContent, IonLabel, IonCard, IonItem, IonCardContent, IonSelectOption, CommonModule, FormsModule, IonSelect]
+  imports: [HeaderComponent,IonInput, IonButton, IonContent, IonLabel, IonCard, IonItem, IonCardContent, IonSelectOption, CommonModule, FormsModule, IonSelect]
 
 })
 export class AddCharacterComponent  implements OnInit {

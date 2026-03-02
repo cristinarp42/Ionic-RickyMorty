@@ -1,6 +1,6 @@
 import { Result } from './../../shared/models/personaje.model';
 import { Component, OnInit } from '@angular/core';
-import { IonContent, IonItem, IonLabel, IonList } from '@ionic/angular/standalone';
+import { IonContent, IonItem, IonLabel, IonList, IonCard, IonCardContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { RickMortyService } from '../../shared/services/rickymorty.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import { AvatarComponent } from "src/app/shared/components/avatar/avatar.compone
   selector: 'app-info-page',
   templateUrl: './info-page.component.html',
   styleUrls: ['./info-page.component.scss'],
-  imports: [IonLabel, IonItem, IonContent, HeaderComponent, CommonModule, AvatarComponent, IonList]
+  imports: [IonCard, IonCardContent, IonLabel, IonItem, IonContent, HeaderComponent, CommonModule, AvatarComponent, IonList]
 })
 export class InfoPageComponent  implements OnInit {
   constructor(

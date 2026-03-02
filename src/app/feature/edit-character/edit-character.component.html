@@ -1,46 +1,49 @@
+<app-header></app-header>
+
 <ion-content class="edit-character-page" fullscreen>
   <div class="form-container">
-    <h2>Editar Personaje</h2>
 
-    <ion-card>
+    <ion-card class="edit-card">
       <ion-card-content>
+
+        <h2>Editar Personaje</h2>
     
-        <!-- Nombre -->
+
         <ion-item>
           <ion-label position="floating">Nombre</ion-label>
           <ion-input [(ngModel)]="personaje.name"></ion-input>
         </ion-item>
 
-        <!-- Especie -->
         <ion-item>
           <ion-label position="floating">Especie</ion-label>
           <ion-input [(ngModel)]="personaje.species"></ion-input>
         </ion-item>
 
-        <!-- Estado -->
         <ion-item>
           <ion-label position="floating">Estado</ion-label>
           <ion-input [(ngModel)]="personaje.status"></ion-input>
         </ion-item>
 
-        <!-- Género -->
+
         <ion-item>
           <ion-label position="floating">Género</ion-label>
           <ion-input [(ngModel)]="personaje.gender"></ion-input>
         </ion-item>
 
-        <img [src]="personaje.image || 'https://rickandmortyapi.com/api/character/avatar/19.jpeg'" alt="Imagen del personaje">
 
-        <!-- Botones -->
         <div class="button-group">
-          <ion-button expand="block" color="primary" (click)="guardarCambios()">
+          <ion-button expand="block" color="success" (click)="guardarCambios()">
+ 
             Guardar
           </ion-button>
-          <ion-button expand="block" color="medium" (click)="cancelar()">
+          <ion-button expand="block" color="success" (click)="cancelar()">
+    
             Cancelar
           </ion-button>
         </div>
+
       </ion-card-content>
     </ion-card>
+
   </div>
 </ion-content>

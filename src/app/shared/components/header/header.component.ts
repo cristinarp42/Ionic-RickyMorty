@@ -5,5 +5,6 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   selector: 'app-header',
   templateUrl: 'header.component.html',
   imports: [IonHeader, IonTitle, IonToolbar],
+  styleUrls: ['header.component.scss']
 })
 export class HeaderComponent {}

@@ -1,16 +1,19 @@
-<ion-content class="add-character-page">
-  <div class="form-container">
-    <h2>Añadir Nuevo Personaje</h2>
+<app-header></app-header>
 
-    <ion-card>
+<ion-content class="add-character-page" fullscreen>
+  <div class="form-container">
+ 
+
+    <ion-card class="add-card">
       <ion-card-content>
-        <!-- Nombre -->
+ <h2>Añadir Nuevo Personaje</h2>
+   
         <ion-item>
           <ion-label position="floating">Nombre</ion-label>
           <ion-input [(ngModel)]="nuevoPersonaje.name"></ion-input>
         </ion-item>
 
-        <!-- Especie -->
+    
         <ion-item>
           <ion-label>Especie</ion-label>
           <ion-select [(ngModel)]="nuevoPersonaje.species" interface="popover" placeholder="Selecciona especie">
@@ -19,7 +22,7 @@
           </ion-select>
         </ion-item>
 
-        <!-- Estado -->
+  
         <ion-item>
           <ion-label>Estado</ion-label>
           <ion-select [(ngModel)]="nuevoPersonaje.status" interface="popover" placeholder="Selecciona estado">
@@ -28,7 +31,7 @@
           </ion-select>
         </ion-item>
 
-        <!-- Género -->
+    
         <ion-item>
           <ion-label>Género</ion-label>
           <ion-select [(ngModel)]="nuevoPersonaje.gender" interface="popover" placeholder="Selecciona género">
@@ -37,17 +40,24 @@
           </ion-select>
         </ion-item>
 
-        <!-- Imagen -->
-       <ion-item>
-  <ion-label position="stacked">Imagen URL</ion-label>
-  <ion-input [(ngModel)]="nuevoPersonaje.image" placeholder="Deja vacío para imagen por defecto"></ion-input>
-</ion-item>
 
-        <!-- Botones -->
-        <div class="button-group" style="margin-top: 20px;">
-          <ion-button expand="block" color="primary" (click)="guardarPersonaje()">Guardar</ion-button>
-          <ion-button expand="block" color="medium" (click)="cancelar()">Cancelar</ion-button>
+        <ion-item>
+          <ion-label position="stacked">Imagen URL</ion-label>
+          <ion-input [(ngModel)]="nuevoPersonaje.image" placeholder="Deja vacío para imagen por defecto"></ion-input>
+        </ion-item>
+
+ 
+        <div class="button-group">
+          <ion-button expand="block" color="success" (click)="guardarPersonaje()">
+ 
+            Guardar
+          </ion-button>
+          <ion-button expand="block" color="success" (click)="cancelar()">
+    
+            Cancelar
+          </ion-button>
         </div>
+
       </ion-card-content>
     </ion-card>
   </div>
