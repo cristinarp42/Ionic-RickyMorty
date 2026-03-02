@@ -20,8 +20,16 @@ export const routes: Routes = [
          loadComponent:() => import('../feature/tab3/tab3.page').then((m) => m.Tab3Page)
       },
       {
+         path: 'tab4',
+         loadComponent:() => import('../feature/tab4/add-character.component').then((m) => m.AddCharacterComponent)
+      },
+      {
         path:'info-character/:id',
         loadComponent:() => import('../feature/info-page/info-page.component').then((m) => m.InfoPageComponent)
+      },
+      {
+        path:'edit-character/:id',
+        loadComponent:() => import('../feature/edit-character/edit-character.component').then((m) => m.EditCharacterComponent)
       },
       {
         path: '',

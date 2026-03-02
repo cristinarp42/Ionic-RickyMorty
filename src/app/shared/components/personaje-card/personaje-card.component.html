@@ -1,7 +1,7 @@
 <div class="contenedor-tarjetas">
-<ion-card class="card" *ngFor="let personaje of personajes" (click)="navigateCharacter(personaje.id)" >
-  <img alt="Personaje de Rick y Morty" [src]= "personaje.image" />
-  <ion-card-header>
+<ion-card class="card" *ngFor="let personaje of personajes" >
+  <img alt="Personaje de Rick y Morty" [src]= "personaje.image" (click)="navigateCharacter(personaje.id)" />
+  <ion-card-header >
     <ion-card-title>{{personaje.name}}</ion-card-title>
     <ion-card-subtitle>{{personaje.gender}}</ion-card-subtitle>
   </ion-card-header>
@@ -12,6 +12,12 @@
       <li><strong>Estado: </strong>{{personaje.status}}</li>
       <li><strong>Localización: </strong>{{personaje.location.name}}</li>
     </ul>
+    <ion-button color="primary" (click)="editarPersonaje(personaje.id)">
+      Editar
+    </ion-button>
+    <ion-button color="danger" (click)="eliminarPersonaje(personaje.id)">
+      Eliminar
+    </ion-button>
   </ion-card-content>
 </ion-card>
 </div>

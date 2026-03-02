@@ -1,16 +1,17 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton } from '@ionic/angular/standalone';
 import { RickMortyService } from '../../services/rickymorty.service';
 import { Result } from '../../models/personaje.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-personaje-card',
   templateUrl: './personaje-card.component.html',
   styleUrl: './personaje-card.component.css',
   standalone: true,
-  imports: [ CommonModule, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle]
+  imports: [ CommonModule, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton]
 })
 
 
@@ -27,31 +28,38 @@ export class PersonajeCard implements OnInit{
     private route: Router
   ) {}
 
-  ngOnInit() {
+    ngOnInit() {
+    this.rickMortyService.cargarInicial();
     this.cargarPersonajes();
   }
 
 
-  navigateCharacter(id: number){
-    this.route.navigate(['info-character/', id]
-    )
+  ionViewWillEnter() {
+    this.cargarPersonajes();
   }
 
   cargarPersonajes() {
-
-    if (this.tipo){
-      this.rickMortyService.getPersonajesporCategoria(this.tipo).subscribe(response => {
-        this.personajes= response.results;
-      })
-
-    } else {
-      this.rickMortyService.getPersonajes().subscribe(response => {
-        this.personajes = response.results; 
-    });
-    }
-  
+    this.personajes = this.rickMortyService.getPersonajesporCategoria(this.tipo || '');
+    console.log('Personajes cargados:', this.personajes);
   }
 
 
+  navigateCharacter(id: number){
+    this.route.navigate(['info-character/', id])
+
   }
+
+  //traer el servidio de eliminar personaje
+  eliminarPersonaje(id: number) {
+    this.rickMortyService.eliminarPersonaje(id);
+    // Actualizar la lista de personajes después de eliminar uno
+    this.personajes = this.rickMortyService.getPersonajes();
+  }
+
+  editarPersonaje(id: number) {
+    // Navegar a una ruta de edición pasando el ID del personaje
+    this.route.navigate(['edit-character/', id]);
+  }
+
+}
 

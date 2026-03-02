@@ -21,24 +21,23 @@ export class InfoPageComponent  implements OnInit {
     private activeRouter: ActivatedRoute
   ) { }
 
-  personaje!: Result;
+  personaje!: Result; //solo un personaje, no un array
   id: number = 0
 
 
   ngOnInit() {
-  this.activeRouter.paramMap.subscribe(params => {
-  this.id = Number(params.get('id'));
-  this.cargarPersonajes();
+     //Obtengo el id del personaje de la url
+    this.activeRouter.paramMap.subscribe(params => {
+    this.id = Number(params.get('id'));
+
+    //Carga inicial de los personajes
+    this.rickMortyService.cargarInicial();
+
+    //Traer los datos para este compoennte
+    this.personaje = this.rickMortyService.getPerspnajesPorId(this.id);
 });
 }
 
 
-   cargarPersonajes() {
-      console.log(this.id)
-      this.rickMortyService.getPerspnajesPorId(this.id).subscribe(response => {
-        this.personaje= response.results;
-        
-        console.log(this.personaje)
-      })
-    }
+ 
 }
