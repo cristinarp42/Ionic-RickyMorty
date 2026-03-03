@@ -16,6 +16,7 @@ export class RickMortyService {
 
   //Carga inicial de los personajes
   cargarInicial() {
+    // Si no hay personajes en localStorage, los cargamos desde la API y los guardamos en localStorage
     if (!localStorage.getItem('personajes')) {
         this.http.get<any>(this.apiUrl + "/character").subscribe(data => {
           const resultados: Result[] = data.results //extraemos solo el result del objeto que nos devuelve la api (tenia input y results)

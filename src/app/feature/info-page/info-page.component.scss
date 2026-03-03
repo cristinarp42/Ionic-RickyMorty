@@ -13,7 +13,7 @@
   width: 100%;
   max-width: 500px;
   margin-top: 20px;
-  background: #ffffff; 
+  background: black; 
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   padding: 15px;
@@ -22,9 +22,10 @@
 
 
 ion-item {
+  
   --background: transparent; 
-  border-bottom: 1px solid #eee; 
   margin-bottom: 5px;
+  background-color: black;
 }
 
 ion-label {

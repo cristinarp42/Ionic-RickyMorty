@@ -43,7 +43,7 @@ export class EditCharacterComponent  implements OnInit {
   }
 
   cancelar() {
-    this.route.navigate(['/tab1']); // Volver a la página principal sin guardar los cambios
+    this.route.navigate(['/tab1']); 
   }
 
 }

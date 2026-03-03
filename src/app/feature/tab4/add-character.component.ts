@@ -49,6 +49,7 @@ export class AddCharacterComponent  implements OnInit {
   guardarPersonaje() {
     const personajes = this.rickMortyService.getPersonajes();
     // Asignar un ID único al nuevo personaje
+    // Si no hay personajes, el ID será 1, de lo contrario, será el máximo ID actual + 1
     const ultimoID = personajes.length ? Math.max(...personajes.map(p => p.id)) : 0;
     this.nuevoPersonaje.id = ultimoID + 1;
 
