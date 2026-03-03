@@ -47,6 +47,7 @@ export class PersonajeCard implements OnInit{
 
   ionViewWillEnter() {
     this.cargarPersonajes();
+    console.log('ionViewWillEnter: Personajes cargados:', this.personajes);
   }
 
   cargarPersonajes() {
