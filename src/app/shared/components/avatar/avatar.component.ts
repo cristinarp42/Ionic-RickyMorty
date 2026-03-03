@@ -15,8 +15,15 @@ export class AvatarComponent  implements OnInit {
   @Input() genero: string = '';
 
 
+
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  console.log('AvatarComponent - foto:', this.foto);
+  console.log('AvatarComponent - nombre:', this.nombre);
+  console.log('AvatarComponent - especie:', this.especie);
+  console.log('AvatarComponent - genero:', this.genero);
+  }
 
 }

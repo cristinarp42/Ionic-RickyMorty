@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Gender, Result, Species, Status, Location } from 'src/app/shared/models/personaje.model';
 import { 
   IonButton, IonContent, IonInput, IonLabel, IonCard, IonItem, IonCardContent, 
-  IonSelect, IonSelectOption 
+  IonSelect, IonSelectOption, AlertController
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';  
@@ -39,7 +39,8 @@ export class AddCharacterComponent  implements OnInit {
 
   constructor(
     private rickMortyService: RickMortyService,
-    private route: Router 
+    private route: Router,
+    private AlertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -47,20 +48,30 @@ export class AddCharacterComponent  implements OnInit {
   }
 
   guardarPersonaje() {
-    const personajes = this.rickMortyService.getPersonajes();
-    // Asignar un ID único al nuevo personaje
-    // Si no hay personajes, el ID será 1, de lo contrario, será el máximo ID actual + 1
-    const ultimoID = personajes.length ? Math.max(...personajes.map(p => p.id)) : 0;
-    this.nuevoPersonaje.id = ultimoID + 1;
+    const personajes = localStorage.getItem('personajes');
+    const personajesArray: Result[] = personajes ? JSON.parse(personajes) : [];
 
     if(!this.nuevoPersonaje.image) {
       this.nuevoPersonaje.image = 'https://rickandmortyapi.com/api/character/avatar/19.jpeg';
     }
 
-    personajes.push(this.nuevoPersonaje);
-    this.rickMortyService.guardarPersonajes(personajes);
-
-    this.route.navigate(['/tab1']);
+    personajesArray.push(this.nuevoPersonaje);
+    localStorage.setItem('personajes', JSON.stringify(personajesArray));
+    console.log('Personaje guardado:', this.nuevoPersonaje);
+    this.AlertController.create({
+      header: 'Personaje Guardado',
+      message: 'El personaje ha sido guardado exitosamente.',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.route.navigate(['/tab1']);
+          }
+        }
+      ]
+    }).then(alert => {
+      alert.present();
+    });
   }
 
   cancelar() {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton } from '@ionic/angular/standalone';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, AlertController } from '@ionic/angular/standalone';
 import { RickMortyService } from '../../services/rickymorty.service';
 import { Result } from '../../models/personaje.model';
 import { CommonModule } from '@angular/common';
@@ -21,38 +21,34 @@ import { addIcons } from 'ionicons';
 export class PersonajeCard implements OnInit{
 
   personajes: Result[] = []
-  
-  //está esperando el tipo de personaje desde el componente padre (los tabs)
   @Input() tipo?: string
-
-  
 
   constructor(
     private rickMortyService: RickMortyService,
-    //nuevo añadido por Josua: para la ruta a la pagina de info
-    private route: Router
+    private route: Router,
+    private AlertController: AlertController
     
   
   ) {
     addIcons({ createOutline, trashOutline });
+    console.log('PersonajeCard creado con tipo:', this.tipo);
   }
 
-    ngOnInit() {
-    this.rickMortyService.cargarInicial();
-    this.cargarPersonajes();
+  ngOnInit() {
+    if(localStorage.getItem('personajes') && !this.tipo) {
+      this.personajes = JSON.parse(localStorage.getItem('personajes')!);
+    } else {
+      this.cargarPersonajes();
+    }
   }
 
-
-
-
-  ionViewWillEnter() {
-    this.cargarPersonajes();
-    console.log('ionViewWillEnter: Personajes cargados:', this.personajes);
-  }
 
   cargarPersonajes() {
-    this.personajes = this.rickMortyService.getPersonajesporCategoria(this.tipo || '');
-    console.log('Personajes cargados:', this.personajes);
+     this.rickMortyService.getPersonajes(this.tipo).subscribe((m: { results: Result[]; }) => {
+      console.log('Personajes cargados desde la API:', m);
+      this.personajes = m.results;
+      localStorage.setItem('personajes', JSON.stringify(this.personajes));
+    });
   }
 
 
@@ -61,15 +57,32 @@ export class PersonajeCard implements OnInit{
 
   }
 
-  //traer el servidio de eliminar personaje
+ 
   eliminarPersonaje(id: number) {
+   console.log('Eliminando personaje con id:', id);
+   this.AlertController.create({
+    header: 'Confirmar eliminación',
+    message: '¿Estás seguro de que quieres eliminar este personaje?',
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel'
+      },
+      {
+        text: 'Eliminar',
+        handler: () => {
     this.rickMortyService.eliminarPersonaje(id);
-    // Actualizar la lista de personajes después de eliminar uno
-    this.personajes = this.rickMortyService.getPersonajes();
-  }
+    // Actualizar la lista de personajes después de eliminar
+    this.cargarPersonajes();
+        }
+      }
+    ]
+  }).then(alert => {
+    alert.present();
+  });
+}
 
   editarPersonaje(id: number) {
-    // Navegar a una ruta de edición pasando el ID del personaje
     this.route.navigate(['edit-character/', id]);
   }
 

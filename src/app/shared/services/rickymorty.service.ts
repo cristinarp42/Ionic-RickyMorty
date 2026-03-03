@@ -15,52 +15,30 @@ export class RickMortyService {
   constructor(private http: HttpClient) {}
 
   //Carga inicial de los personajes
-  cargarInicial() {
+  getPersonajes(type?: string, id?: number) {
+    console.log('Obteniendo personajes desde la API con tipo:', type, 'y id:', id);
     // Si no hay personajes en localStorage, los cargamos desde la API y los guardamos en localStorage
-    if (!localStorage.getItem('personajes')) {
-        this.http.get<any>(this.apiUrl + "/character").subscribe(data => {
-          const resultados: Result[] = data.results //extraemos solo el result del objeto que nos devuelve la api (tenia input y results)
-          localStorage.setItem('personajes', JSON.stringify(resultados));
-        });
-      }
+        return this.http.get<any>(this.apiUrl + "/character" + (type ? `?species=${type}` : '') + (id ? `/${id}` : ''));
+      
   }
-
-//getPersonajes siempre devuelve un array
-  getPersonajes(): Result[] {
-    const personajes = localStorage.getItem('personajes');
-    if (!personajes) return [];
-    const parsed = JSON.parse(personajes);
-    return Array.isArray(parsed) ? parsed : parsed.results || [];
-  }
-
   //Guardar array actualizado
   guardarPersonajes(personajes: Result[]) {
-    // "stringify" convierte el array de objetos a un string para guardarlo en localStorage
     localStorage.setItem('personajes', JSON.stringify(personajes));
   }
   
-  getPersonajesporCategoria(categoria: string): Result[] {
-    const personajes = this.getPersonajes();
-     return categoria ? personajes.filter(p => p.species === categoria) : personajes;
-  }
 
-  getPerspnajesPorId(id: number):  Result {
-    const personajes = this.getPersonajes();
-    return personajes.find(p => p.id === id) as Result;
-  }
 
   //Eliminar personaje por id
-  eliminarPersonaje(id: number) {
-    let personajes = this.getPersonajes();
+   eliminarPersonaje(id: number) {
+    let personajes = JSON.parse(localStorage.getItem('personajes') || '[]') as Result[];
     personajes = personajes.filter(p => p.id !== id);
     this.guardarPersonajes(personajes);
   }
 
   //Editar personaje
     editarPersonaje(personajeEditado: Result) {
-    const actuales = this.getPersonajes();
+    const actuales = JSON.parse(localStorage.getItem('personajes') || '[]') as Result[];
     const actualizados = actuales.map(p =>
-      // Si el id del personaje actual es igual al id del personaje editado, lo reemplazamos, si no, lo dejamos igual
       p.id === personajeEditado.id ? personajeEditado : p
     );
     this.guardarPersonajes(actualizados);

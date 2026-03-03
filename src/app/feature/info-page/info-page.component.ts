@@ -30,11 +30,11 @@ export class InfoPageComponent  implements OnInit {
     this.activeRouter.paramMap.subscribe(params => {
     this.id = Number(params.get('id'));
 
-    //Carga inicial de los personajes
-    this.rickMortyService.cargarInicial();
-
+   
     //Traer los datos para este compoennte
-    this.personaje = this.rickMortyService.getPerspnajesPorId(this.id);
+    this.rickMortyService.getPersonajes(undefined, this.id).subscribe((personaje: Result) => {
+      this.personaje = personaje;
+    });
 });
 }
 
